@@ -19,8 +19,10 @@ public class Guerreiro extends Heroi{
 
 //-----métodos-----
 
-    public void atacar(int dano){
-        this.pontoDeVida-=dano;
+    @Override
+    public int atacar(Personagem personagem){
+        personagem.pontoDeVida-=forca;
+        return forca;
     }
 
     public void ganharExperiencia(int incremento){
