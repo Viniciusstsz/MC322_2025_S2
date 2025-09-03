@@ -19,9 +19,6 @@ public abstract class Monstro extends Personagem{
 
 //-----métodos-----
 
-    @Override
-    public String exibirStatus() {
-        return "nome"+this.nome+"vida"+this.pontoDeVida;
-    }
+    protected abstract void exibirStatus();
 
 }

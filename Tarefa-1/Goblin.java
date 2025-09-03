@@ -12,4 +12,8 @@ public class Goblin extends Monstro{
         return forca;
     }
     
+    @Override
+    protected void exibirStatus(){
+        System.out.println("nome: "+this.nome+" vida:"+this.pontoDeVida+" força:"+this.forca+" XP concedido:"+this.xpConcedido);
+    }
 }
