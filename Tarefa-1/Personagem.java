@@ -44,9 +44,7 @@ public abstract class Personagem {
         return pontoDeVida;
     }
 
-    protected String exibirStatus(){
-        return "nome"+this.nome+"vida"+this.pontoDeVida;
-    }
+    protected abstract void exibirStatus();
 
     protected abstract int atacar(Personagem personagem);
 

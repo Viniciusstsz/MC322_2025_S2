@@ -33,4 +33,9 @@ public class Guerreiro extends Heroi{
     public void usarHabilidadeEspecial() {
         System.out.println("O guerreiro utiliza furia");
     }
+
+    @Override
+    protected void exibirStatus(){
+        System.out.println("nome: "+this.nome+" vida:"+this.pontoDeVida+" força:"+this.forca+" experiência:"+this.experiencia+" furia:"+this.furia);
+    }
 }
