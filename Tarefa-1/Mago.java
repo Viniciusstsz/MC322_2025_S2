@@ -2,7 +2,7 @@ public class Mago extends Heroi{
     
     private int mana;
 
-    public Mago(String nome, int pontoDeVida, int forca, int nivel, int experiencia, int furia ){
+    public Mago(String nome, int pontoDeVida, int forca, int nivel, int experiencia, int mana ){
         super(nome, pontoDeVida, forca, nivel, experiencia);
         this.mana=mana;
     }
@@ -20,22 +20,13 @@ public class Mago extends Heroi{
 //-----métodos-----
 
     @Override
-    public int atacar(Personagem personagem){
-        personagem.pontoDeVida-=forca;
+    public int atacar(Personagem alvo){
+        alvo.recebeDano(forca);
         return forca;
-    }
-
-    public void ganharExperiencia(int incremento){
-        this.experiencia+=incremento;
     }
 
     @Override
     public void usarHabilidadeEspecial() {
         System.out.println("O Mago conjura uma bola de fogo!");
-    }
-
-    @Override
-    protected void exibirStatus(){
-        System.out.println("nome: "+this.nome+" vida:"+this.pontoDeVida+" força:"+this.forca+" experiência:"+this.experiencia+" mana:"+this.mana);
     }
 }
