@@ -7,13 +7,9 @@ public class Harpia extends Monstro{
 //-----métodos-----
 
     @Override
-    public int atacar(Personagem personagem){
-        personagem.pontoDeVida-=forca;
+    public int atacar(Personagem alvo){
+        alvo.recebeDano(forca);
         return forca;
     }
     
-    @Override
-    protected void exibirStatus(){
-        System.out.println("nome: "+this.nome+" vida:"+this.pontoDeVida+" força:"+this.forca+" XP concedido:"+this.xpConcedido);
-    }
 }
