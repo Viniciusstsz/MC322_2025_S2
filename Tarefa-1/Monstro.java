@@ -19,6 +19,12 @@ public abstract class Monstro extends Personagem{
 
 //-----métodos-----
 
-    protected abstract void exibirStatus();
-
+    @Override
+    public void exibirStatus() {
+        System.out.println("=== Monstro ===");
+        System.out.println(this.nome);
+        System.out.println("Vida: "+this.pontoDeVida+"    Força: "+this.forca);
+        System.out.println("XP concedido: "+this.xpConcedido);
+        System.out.println("");
+    }
 }
