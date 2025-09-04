@@ -20,22 +20,13 @@ public class Guerreiro extends Heroi{
 //-----métodos-----
 
     @Override
-    public int atacar(Personagem personagem){
-        personagem.pontoDeVida-=forca;
+    public int atacar(Personagem alvo){
+        alvo.recebeDano(forca);
         return forca;
-    }
-
-    public void ganharExperiencia(int incremento){
-        this.experiencia+=incremento;
     }
 
     @Override
     public void usarHabilidadeEspecial() {
-        System.out.println("O guerreiro utiliza furia");
-    }
-
-    @Override
-    protected void exibirStatus(){
-        System.out.println("nome: "+this.nome+" vida:"+this.pontoDeVida+" força:"+this.forca+" experiência:"+this.experiencia+" furia:"+this.furia);
+        System.out.println("O Guerreiro utiliza furia");
     }
 }
