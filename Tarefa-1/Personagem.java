@@ -40,6 +40,10 @@ public abstract class Personagem {
 //-----métodos-----
 
     protected int recebeDano(int dano){
+        if(dano>=this.pontoDeVida){
+            this.pontoDeVida=0;
+            return 0;
+        }
         this.pontoDeVida-=dano;
         return pontoDeVida;
     }
