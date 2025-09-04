@@ -35,5 +35,12 @@ public abstract class Heroi extends Personagem{
 
     public abstract void usarHabilidadeEspecial();
 
-
+    @Override
+    public void exibirStatus() {
+        System.out.println("=== Héroi ===");
+        System.out.println(this.nome);
+        System.out.println("Vida: "+this.pontoDeVida+"    Força: "+this.forca);
+        System.out.println("Nível: "+this.nivel+"    XP: "+this.experiencia);
+        System.out.println("");
+    }
 }
