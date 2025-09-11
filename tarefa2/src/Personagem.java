@@ -39,21 +39,16 @@ public abstract class Personagem {
         this.forca = forca;
     }
 
-//-----métodos-----
-
-    protected int recebeDano(int dano, Personagem atacante){
-        System.out.println("[*]"+this.nome+" recebeu "+dano+" de dano.");
-        if(dano>=this.pontoDeVida){
-            this.pontoDeVida=0;
-            System.out.println("!"+this.nome+" foi derrotado por"+atacante.getNome()+"!");
-            return 0;
-        }
-        this.pontoDeVida-=dano;
-        return pontoDeVida;
+    public Arma getArma() {
+        return arma;
     }
 
-    protected abstract void exibirStatus();
+    public void setArma(Arma arma) {
+        this.arma = arma;
+    }
 
-    protected abstract int atacar(Personagem alvo);
+//-----métodos-----
+
+    protected abstract void exibirStatus();
 
 }

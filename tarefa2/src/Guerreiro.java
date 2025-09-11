@@ -19,15 +19,15 @@ public class Guerreiro extends Heroi{
 
 //-----métodos-----
 
-    @Override
-    public int atacar(Personagem alvo){
+    
+    public int atacar(Monstro alvo){
         System.out.println(">>>"+this.nome+" atacou "+alvo.getNome()+".");
-        alvo.recebeDano(forca, this);
+        alvo.recebeDano(forca+arma.getDano(), this);
         return forca;
     }
 
     @Override
-    public void usarHabilidadeEspecial(Personagem alvo) {
+    public void usarHabilidadeEspecial(Monstro alvo) {
         System.out.println("O Guerreiro utiliza furia");
         furia--;
         if(this.sorte > 0.5){

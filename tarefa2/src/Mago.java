@@ -19,17 +19,17 @@ public class Mago extends Heroi{
 
 //-----métodos-----
 
-    @Override
-    public int atacar(Personagem alvo){
+    
+    public int atacar(Monstro alvo){
         System.out.println(">>>"+this.nome+" lançou um feitiço em "+alvo.getNome()+".");
-        alvo.recebeDano(forca, this);
+        alvo.recebeDano(forca + arma.getDano(), this);
         return forca;
     }
 
     @Override
-    public void usarHabilidadeEspecial(Personagem alvo) {
+    public void usarHabilidadeEspecial(Monstro alvo) {
         System.out.println("O Mago conjura uma bola de fogo!");
-        if(this.sorte > 0.5 && this.mana >= 5){
+        if(this.sorte > Math.random() && this.mana >= 5){
             System.out.println("Acertou o golpe crítico!");
             alvo.recebeDano(forca*2, this);
             this.mana -= 5;
@@ -37,7 +37,8 @@ public class Mago extends Heroi{
             System.out.println("O Mago está sem mana e não consegue conjurar a bola de fogo.");
         } else{
             System.out.println("A bola de fogo erra o alvo, explodindo no chão próximo a ele.");
-            this.recebeDano(forca/5, this);
+            this.pontoDeVida -= 5;
+            System.out.println("O Mago sofre 5 de dano por queimadura.");
             this.mana -= 5;
         }
     }

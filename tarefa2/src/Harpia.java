@@ -1,3 +1,4 @@
+
 public class Harpia extends Monstro{
     
     public Harpia(String nome, int pontoDeVida, int forca, Arma arma, int xpConcedido){
@@ -6,10 +7,10 @@ public class Harpia extends Monstro{
 
 //-----métodos-----
 
-    @Override
-    public int atacar(Personagem alvo){
+    
+    public int atacar(Heroi alvo){
         System.out.println(">>>"+this.nome+" atacou "+alvo.getNome()+".");
-        alvo.recebeDano(forca, this);
+        alvo.recebeDano(forca + arma.getDano(), this);
         return forca;
     }
     

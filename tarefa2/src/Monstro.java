@@ -1,8 +1,6 @@
 public abstract class Monstro extends Personagem{
 
     private int xpConcedido;
-    private Arma listaDeArmasParaLargar[];
-
 
     public Monstro(String nome, int pontoDeVida, int forca, Arma arma, int xpConcedido){
         super(nome, pontoDeVida, forca, arma);
@@ -21,39 +19,48 @@ public abstract class Monstro extends Personagem{
 
 //-----métodos-----
 
+
+    //exibe status do monstro
     @Override
     public void exibirStatus() {
-        System.out.println("=== Monstro ===");
-        System.out.println(this.nome);
-        System.out.println("Vida: "+this.pontoDeVida+"    Força: "+this.forca);
-        System.out.println("XP concedido: "+this.xpConcedido);
+        System.out.println("");
+        System.out.println("[MONSTRO] "+this.nome+" | Vida: "+this.pontoDeVida+" | Forca: "+this.forca+" | XPconcedido: "+this.xpConcedido+" | Arma: "+this.arma.getNome());
         System.out.println("");
     }
 
-    protected int recebeDano(int dano, Heroi atacante){
+    //monstro recebe dano de heroi
+    //se morrer, heroi ganha experiencia e monstro pode largar arma
+    //retorna o dano recebido
+    public int recebeDano(int dano, Heroi atacante){
 
         System.out.println("[*]"+this.nome+" recebeu "+dano+" de dano.");
         
         if(dano>=this.pontoDeVida){
             this.pontoDeVida=0;
             System.out.println("!"+this.nome+" foi derrotado!");
-            atacante.ganharExperiencia(this.xpConcedido);
             this.largarArma(atacante);
-            return 0;
+            atacante.ganharExperiencia(this.xpConcedido);
+            return dano;
         }
 
         this.pontoDeVida-=dano;
-        return pontoDeVida;
+        return dano;
     }
 
+    //monstro tem uma chance de largar a arma quando derrotado
+    //se largar a arma, o heroi pode trocar a arma atual pela arma largada
     private void largarArma(Heroi heroi){
-
-        int numeroDeArmasNaLista=this.listaDeArmasParaLargar.length;
-        int indiceDaArmaSorteada=(int)(Math.random()*numeroDeArmasNaLista);
-
-        Arma armaSorteada=this.listaDeArmasParaLargar[indiceDaArmaSorteada];
-
+        if(heroi.getSorte() < Math.random()){
+            System.out.println("~~~"+this.nome+" não largou a arma.");
+            return;
+        }
         System.out.println("~~~"+this.nome+" largou a arma.");
-        heroi.trocarArma(armaSorteada);
+        heroi.trocarArma(this.arma);
+    }
+
+    public int atacar(Heroi alvo){
+        System.out.println(">>>"+this.nome+" atacou "+alvo.getNome()+".");
+        alvo.recebeDano(forca+arma.getDano(), this);
+        return forca;
     }
 }
