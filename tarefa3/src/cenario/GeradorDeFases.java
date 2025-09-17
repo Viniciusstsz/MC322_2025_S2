@@ -4,5 +4,5 @@ import interfaces.Fase;
 
 public interface GeradorDeFases {
     
-    public Fase gerar(int quantidadeDeFases);
+    public Fase[] gerar(int quantidadeDeFases);
 }

@@ -7,7 +7,6 @@ public abstract class Arma implements Item {
     private int dano;
     private String nome;
 
-
     public Arma(int minNivel,int dano, String nome){
         this.minNivel=minNivel;
         this.dano=dano;
@@ -38,5 +37,9 @@ public abstract class Arma implements Item {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getInformacoes() {
+        return "[Nvl:"+this.minNivel+"] "+ this.nome + " +" + this.dano;
     }
 }

@@ -1,10 +1,9 @@
 package personagens.herois;
 
-import personagens.*;
-
 import java.util.ArrayList;
+import java.util.Random;
 
-import combate.AtaqueFisico;
+import combate.*;
 import itens.armas.Arma;
 
 public class Guerreiro extends Heroi{
@@ -16,6 +15,7 @@ public class Guerreiro extends Heroi{
     this.furia = furia;
     this.acoes = new ArrayList<>();
     this.acoes.add(new AtaqueFisico());
+    this.acoes.add(new AtaqueComFuria());
 }
     
 //Setters e Getters
@@ -30,22 +30,42 @@ public class Guerreiro extends Heroi{
 
 //-----métodos-----
 
-    public int atacar(Personagem alvo){
-        System.out.println(">>>"+this.nome+" atacou "+alvo.getNome()+".");
-        alvo.receberDano(forca+arma.getDano(), this);
-        return forca;
+    // Exibe status do guerreiro 
+    @Override
+    public void exibirStatus() {
+        System.out.println("[GUERREIRO] "+this.nome+
+        " | Vida: "+this.pontoDeVida+"/"+this.vidaMaxima+
+        " | Forca: "+this.forca+
+        " | Nivel: "+this.nivel+
+        " | XP: "+this.experiencia+"/"+this.xpProximoNivel+
+        " | Arma: "+this.arma.getInformacoes()+
+        " | Sorte: "+this.sorte+
+        " | Furia: "+this.furia);
     }
 
     @Override
-    public void usarHabilidadeEspecial(Personagem alvo) {
-        System.out.println("O Guerreiro utiliza furia");
-        furia--;
-        if(this.sorte > 0.5){
-            System.out.println("Acertou o golpe crítico!");
-            alvo.receberDano((forca+arma.getDano())*2, this);
-        } else{
-            System.out.println("Ele tropeça no próprio pé enquanto ataca, fazendo mais um passo de dança do que um golpe mortal.");
-            System.out.println("Ele erra o golpe!");
+    public AcaoDeCombate escolherAcao(Combatente alvo) {
+        double vidaAtual = (double) this.pontoDeVida / this.vidaMaxima;
+
+        if (vidaAtual < 0.5 || furia > 10) {
+            // procura ação de furia na lista
+            for (AcaoDeCombate acao : acoes) {
+                if (acao instanceof AtaqueComFuria && this.furia > 0) {
+                    return acao;
+                }
+            }
+            // fallback: se não achou ataque de fúria, tenta físico
+            for (AcaoDeCombate acao : acoes) {
+                if (acao instanceof AtaqueFisico) {
+                    return acao;
+                }
+            }
         }
+
+        // se não entrou nas condições, escolhe aleatório
+        Random rand = new Random();
+        int indice = rand.nextInt(acoes.size());
+        return acoes.get(indice);
     }
+
 }

@@ -6,19 +6,19 @@ public enum TipoCenario {
     FAZENDA("O Touro Enfurecido") {
         @Override
         public void aplicarEfeitos(Heroi heroi) {
-            System.out.println("Um celeiro antigo, cercado por pastos verdes, com uma cerca de madeira rangendo.");
+            System.out.println("Ambiente: Um celeiro antigo, cercado por pastos verdes, com uma cerca de madeira rangendo.");
         }
     },
     MINA("A Mina Abandonada") {
         @Override
         public void aplicarEfeitos(Heroi heroi) {
-            System.out.println("Um túnel escuro e úmido, com paredes de pedra cobertas de musgo. O som distante de gotejamento de água ecoa pelas cavernas, e há um cheiro de terra molhada no ar.");
+            System.out.println("Ambiente: Um túnel escuro e úmido, com paredes de pedra cobertas de musgo. O som distante de gotejamento de água ecoa pelas cavernas, e há um cheiro de terra molhada no ar.");
         }
     },
     FLORESTA("A Floresta Sombria") {
         @Override
         public void aplicarEfeitos(Heroi heroi) {
-            System.out.println("Uma floresta densa e escura, onde a luz do sol mal penetra através das copas das árvores. O som de folhas farfalhando e galhos quebrando cria uma atmosfera inquietante.");
+            System.out.println("Ambiente: Uma floresta densa e escura, onde a luz do sol mal penetra através das copas das árvores. O som de folhas farfalhando e galhos quebrando cria uma atmosfera inquietante.");
         }
     };
 

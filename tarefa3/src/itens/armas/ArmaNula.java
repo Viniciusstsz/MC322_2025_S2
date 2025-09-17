@@ -6,4 +6,8 @@ public class ArmaNula extends Arma{
         super(0, 0, "Sem arma");
     }
     
+    @Override
+    public String getInformacoes() {
+        return "Sem Arma";
+    }
 }

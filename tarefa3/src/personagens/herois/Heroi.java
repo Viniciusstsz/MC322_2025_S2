@@ -67,28 +67,21 @@ public abstract class Heroi extends Personagem{
 
     //incrementa a experiencia e verifica se o heroi sobe de nivel
     public void ganharExperiencia(int incremento){
-        System.out.println("***"+this.nome+" ganhou "+incremento+" de experiência.");
         this.experiencia+=incremento;
         subirDeNivel();
-    }
-
-    //heroi ataca
-    //retorna o dano causado
-    public int atacar(Personagem alvo){
-        System.out.println(">>>"+this.nome+" atacou "+alvo.getNome()+".");
-        int dano = alvo.receberDano(forca+arma.getDano(), this);
-        return dano;
     }
 
     //exibe status do heroi 
     @Override
     public void exibirStatus() {
-        System.out.println("");
-        System.out.println("[HEROI] "+this.nome+" | Vida: "+this.pontoDeVida+" | Forca: "+this.forca+" | Nivel: "+this.nivel+" | XP: "+this.experiencia+"/"+this.xpProximoNivel+" | Arma: "+this.arma.getNome()+" | Sorte: "+this.sorte);
-        System.out.println("");
+        System.out.println("[HEROI] "+this.nome+
+        " | Vida: "+this.pontoDeVida+"/"+this.vidaMaxima+
+        " | Forca: "+this.forca+
+        " | Nivel: "+this.nivel+
+        " | XP: "+this.experiencia+"/"+this.xpProximoNivel+
+        " | Arma: "+this.arma.getInformacoes()+
+        " | Sorte: "+this.sorte);
     }
-
-    public abstract void usarHabilidadeEspecial(Personagem alvo);
 
     //verifica se o heroi subiu de nivel
     //se sim, atualiza atributos e restaura vida
@@ -105,9 +98,7 @@ public abstract class Heroi extends Personagem{
         this.pontoDeVida = vidaMaxima;
         this.xpProximoNivel += (this.xpProximoNivel + this.nivel * 25);
 
-        System.out.println("");
-        System.out.println("!!!"+this.nome+" subiu para o nivel "+this.nivel+": +"+nivel*3+" de Forca, +"+nivel*5+" de Vida, vida totalmente restaurada!!!");
-        System.out.println("");
+        System.out.println("!!! "+this.nome+" subiu para o nivel "+this.nivel+": +"+nivel*3+" de Forca, +"+nivel*5+" de Vida, vida totalmente restaurada !!!");
     }
     
     // Heroi pode trocar de arma se tiver o nível necessário e a nova arma for melhor que a atual.
@@ -117,18 +108,18 @@ public abstract class Heroi extends Personagem{
         String nomeNova = novaArma.getNome();
 
         if (this.nivel < novaArma.getMinNivel()) {
-            System.out.println("~~~ " + this.nome + " não tem o nível necessário para usar a arma " + nomeNova + ".");
+            System.out.println(this.nome + " não tem o nível necessário para usar a arma " + nomeNova + ".");
             return;
         }
 
         if (novaArma.getDano() <= this.arma.getDano()) {
-            System.out.println("~~~ " + this.nome + " decidiu manter " + nomeAtual + " em vez de trocar por " + nomeNova + 
+            System.out.println(this.nome + " decidiu manter " + nomeAtual + " em vez de trocar por " + nomeNova + 
                             " (a nova arma é pior ou igual).");
             return;
         }
 
         this.arma = novaArma;
-        System.out.println("~~~ " + this.nome + " trocou " + nomeAtual + " por " + nomeNova + "!");
+        System.out.println(this.nome + " trocou " + nomeAtual + " por " + nomeNova + "!");
     }
 
     @Override
@@ -137,6 +128,4 @@ public abstract class Heroi extends Personagem{
         int indice = rand.nextInt(acoes.size());
         return acoes.get(indice);
     }
-
-
 }

@@ -1,5 +1,6 @@
 package interfaces;
 
+import cenario.TipoCenario;
 import personagens.herois.Heroi;
 
 public interface Fase {
@@ -8,6 +9,6 @@ public interface Fase {
 
     public boolean isConcluida();
 
-    public String getTipoDeCenario();
+    public TipoCenario getTipoDeCenario();
 
 }

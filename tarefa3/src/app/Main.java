@@ -2,8 +2,10 @@ package app;
 
 import personagens.herois.*;
 import personagens.monstros.*;
+import itens.*;
 import itens.armas.*;
 import cenario.*;
+import combate.AcaoDeCombate;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,43 +25,75 @@ public class Main {
         System.out.println("A estrada estava aberta, e novas histórias começavam a se desenrolar.");
         System.out.println("");
 
-        Guerreiro Icarus = new Guerreiro("Icarus", 100, 20, new Espada(1, 2, "Espada enferrujada"), 1, 0, 50, 0.5f, 10);
+        ConstrutorDeCenariosFixo construtor = new ConstrutorDeCenariosFixo();
+
+        Heroi heroi = new Guerreiro("Icarus", 18, 6, new Espada(1, 1, "Espada enferrujada"), 1, 0, 50, 0.5f, 10);
     
-        Fase fases[] = ConstrutorDeCenarios.gerarFases(10);
+        FaseDeCombate fases[] = construtor.gerar(30);
 
         for(int i=0; i<fases.length; i++){
             System.out.println("========== Início da Fase "+(i+1)+" ==========");
-            System.out.println("Fase: "+fases[i].getNome()+" - Ambiente: "+fases[i].getAmbiente());
             System.out.println("");
+            fases[i].iniciar(heroi);
+
             Monstro inimigos[] = fases[i].getInimigos();
-            Icarus.exibirStatus();
+            System.out.println("");
+            heroi.exibirStatus();
 
             for(int j=0; j<inimigos.length; j++){
-                System.out.println("!!! "+inimigos[j].getNome()+" apareceu !!!");
-                inimigos[j].exibirStatus();
+                Monstro inimigo = inimigos[j];
                 System.out.println("");
-                while(inimigos[j].getPontoDeVida() > 0 && Icarus.getPontoDeVida() > 0){
-                    Icarus.atacar(inimigos[j]);
-                    if(inimigos[j].getPontoDeVida() > 0){
-                        inimigos[j].atacar(Icarus);
+                System.out.println("!!! "+inimigo.getNome()+" apareceu !!!");
+                inimigo.exibirStatus();
+                System.out.println("");
+                while(inimigo.estaVivo() && heroi.estaVivo()){
+
+                    AcaoDeCombate acao = heroi.escolherAcao(inimigo);
+                    acao.executar(heroi, inimigo);
+
+                    if(inimigo.estaVivo()){
+                        acao = inimigo.escolherAcao(heroi);
+                        acao.executar(inimigo, heroi);
                     } else {
                         System.out.println("");
                     }
                 }
-                Icarus.exibirStatus();
-                
-                if(Icarus.getPontoDeVida() <= 0){
-                    System.out.println("!!! "+Icarus.getNome()+" foi derrotado na fase "+fases[i].getNome()+" !!!");
+
+                if(heroi.getPontoDeVida() <= 0){
+                    System.out.println("");
+                    System.out.println("!!! "+heroi.getNome()+" foi derrotado na fase "+fases[i].getTipoDeCenario()+" !!!");
+                    heroi.exibirStatus();
+                    System.out.println("");
                     System.out.println("========== Fim do Jogo ==========");
                     return;
                 }
+                System.out.println(inimigo.getNome()+" foi derrotado por "+ heroi.getNome());
+
+                if(inimigo instanceof Lootavel){
+                    Item item = inimigo.droparLoot();
+                    if(item != null){
+                        System.out.println(inimigo.getNome()+ " dropou "+ item.getNome());
+                        if(item instanceof Arma){
+                            heroi.trocarArma((Arma) item);
+                        }
+                    } else System.out.println(inimigo.getNome()+ " nao dropou nada");
+                }
+                int xpConcedido = inimigo.getXpConcedido();
+                System.out.println(heroi.getNome()+ " Ganhou +"+xpConcedido+" de experiencia");
+                System.out.println("");
+                heroi.ganharExperiencia(xpConcedido);
+                heroi.exibirStatus();
+                System.out.println("");
+                
             }
             
-            System.out.println("+++ "+Icarus.getNome()+" completou a fase "+fases[i].getNome()+" +++");
+            System.out.println("!!! "+heroi.getNome()+" completou a fase "+fases[i].getTipoDeCenario()+" !!!");
+            System.out.println("");
             System.out.println("========== Fim da Fase "+(i+1)+" ==========");
             System.out.println("");
         }
-        System.out.println("!!! Parabéns! "+Icarus.getNome()+" completou todas as fases e se tornou um verdadeiro herói! !!!");
+        System.out.println("!!! Parabéns! "+heroi.getNome()+" completou todas as fases e se tornou um verdadeiro herói! !!!");
+        System.out.println("");        
         System.out.println("========== Fim do Jogo ==========");
     }
 }

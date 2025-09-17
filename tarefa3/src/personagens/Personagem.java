@@ -60,14 +60,11 @@ public abstract class Personagem implements Combatente {
     @Override
     public int receberDano(int dano, Combatente atacante){
         this.pontoDeVida-=dano;
-        System.out.println("[*]"+this.nome+" recebeu "+dano+" de dano.");
 
         if(this.pontoDeVida <= 0){
             this.pontoDeVida=0;
-            System.out.println("!"+this.nome+" foi derrotado por "+atacante.getNome()+"!");
             return dano;
         }
-        this.pontoDeVida-=dano;
         return dano;
     }
 
@@ -77,11 +74,12 @@ public abstract class Personagem implements Combatente {
 
     public void exibirStatus(){
         System.out.println("");
-        System.out.println("[PERSONAGEM] "+this.nome+" | Vida: "+this.pontoDeVida+" | Forca: "+this.forca+" | Arma: "+this.arma.getNome());
+        System.out.println("[PERSONAGEM] "+this.nome+
+        " | Vida: "+this.pontoDeVida+"/"+this.vidaMaxima+
+        " | Forca: "+this.forca+
+        " | Arma: "+this.arma.getInformacoes());
         System.out.println("");
     }
-
-    protected abstract int atacar(Personagem alvo);
 
     public abstract AcaoDeCombate escolherAcao(Combatente alvo);
 
