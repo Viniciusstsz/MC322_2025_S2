@@ -29,7 +29,7 @@ public class Main {
 
         Heroi heroi = new Guerreiro("Icarus", 18, 6, new Espada(1, 1, "Espada enferrujada"), 1, 0, 50, 0.5f, 10);
     
-        FaseDeCombate fases[] = construtor.gerar(30);
+        FaseDeCombate fases[] = construtor.gerar(3);
 
         for(int i=0; i<fases.length; i++){
             System.out.println("========== Início da Fase "+(i+1)+" ==========");
@@ -97,3 +97,4 @@ public class Main {
         System.out.println("========== Fim do Jogo ==========");
     }
 }
+
