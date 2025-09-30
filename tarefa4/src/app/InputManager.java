@@ -8,7 +8,7 @@ public class InputManager {
 
     public static int lerInteiro(String mensagem, int min, int max) {
         while (true) {
-            System.out.println(mensagem + " (" + min + " - " + max + "): ");
+            System.out.print(mensagem);
             String input = null;
             try {
                 input = scanner.nextLine().trim();

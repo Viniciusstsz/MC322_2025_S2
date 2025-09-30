@@ -12,20 +12,20 @@ public class ConstrutorDeCenariosFixo implements GeradorDeFases {
     public FaseDeCombate[] gerar(int numeroDeFases, Dificuldade dificuldade){
         FaseDeCombate fases[] = new FaseDeCombate[numeroDeFases];
         for(int i=0; i<numeroDeFases; i++){
-            int nivel = ajustarDificuldade(i, dificuldade);
+            int nivel = ajustarDificuldade(i+1, dificuldade);
             fases[i] = faseAleatoria(nivel);
         }
         return fases;
     }
 
     private static int ajustarDificuldade(int nivel, Dificuldade dificuldade){
-        if(dificuldade == dificuldade.FACIL){
+        if(dificuldade == Dificuldade.FACIL){
             nivel -= 2;
-            if(nivel < 1) nivel = 1;
         }
         if(dificuldade == Dificuldade.DIFICil){
             nivel += 2;
         }
+        if(nivel < 1) nivel = 1;
         return nivel;
     }
 
